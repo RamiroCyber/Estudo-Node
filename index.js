@@ -1,22 +1,25 @@
-const express = require('express'); // Importando o express
-const app = express(); // iniciando o express
+const express = require('express');
+const app = express();
+
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
 
-app.get("/" , function(req,res){  // rota get recebendo uma função de req e res para enviar uma resposta 
-    res.send('Ola mundo');
-    res.send('não vai funcionar') // não se envia uma resposta mais de uma vez numa mesma rota
+
+app.get('/', (req, res) => {
+    res.render('index');
+});
+
+app.get('/question', (req, res) => {
+res.render('question');
 })
 
-app.get("/perfil", function(req,res){
-    res.send('Obrigado por entrar no meu Perfil')
-})
 
-app.listen(4000, function (erro) {
+
+app.listen(4000, (erro) => {
     if (erro) {
-        console.log("Ocorreu um erro");
+        console.log('Erro ao iniciar o servidor')
     } else {
-        console.log("Serviodor iniciado com sucesso")
+        console.log('Iniciado com sucesso')
     }
-})
-
-//nodemon serve para poder fazer modificaçoes sem precisar reiniciar o servidor
+});
