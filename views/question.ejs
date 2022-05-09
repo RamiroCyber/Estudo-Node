@@ -1,40 +1,24 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <title>Question</title>
-</head>
+<%- include('partials/header.ejs');%>
 
 <body>
+    <%- include('partials/navbar.ejs');%>
     <div class="container">
-        <h3>Realizar Pergunta</h3>
-        <form>
-            <label>Título</label>
-            <input type="text" placeholder="Título" class="form-control">
-            <br>
-            <label>Descrição</label>
-            <textarea placeholder="Descreva sua pergunta" cols="20" rows="5" class="form-control"></textarea>
-            <br>
-            <button class="btn btn-success" >Enviar</button>
-        </form>
+        <div class="card" id="formulario-pergunta">
+            <div class="card-header">
+                <h3>Realizar Pergunta</h3>
+            </div>
+            <div class="card-body">
+                <form>
+                    <label>Título</label>
+                    <input type="text" placeholder="Título" class="form-control">
+                    <br>
+                    <label>Descrição</label>
+                    <textarea placeholder="Descreva sua pergunta" cols="20" rows="5" class="form-control"></textarea>
+                    <br>
+                    <button class="btn btn-success">Enviar</button>
+                </form>
+            </div>
+        </div>
     </div>
-
-
-
-
-
 </body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-</script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-</script>
-<script src="/js/bootstrap.min.js"></script>
-
-</html>
+<%- include('partials/script.ejs');%>
