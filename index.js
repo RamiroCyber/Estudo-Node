@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const sequelize = require('./database/db')
-const question = require('./database/Question');
+const Question = require('./database/Question');
 
 //Database
 
@@ -20,7 +20,12 @@ app.use(bodyParser.json());
 
 //ROTAS
 app.get('/', (req, res) => {
-    res.render('index');
+    Question.findAll({raw: true}).then(questions => { // raw: true para retornar apenas os dados
+        console.log(questions);
+        res.render('index' ,{
+            questions: questions
+        });
+    });
 });
 
 app.get('/question', (req, res) => {
@@ -28,9 +33,15 @@ app.get('/question', (req, res) => {
 });
 
 app.post('/savequestion', (req, res) => {
-    let titulo = req.body.titulo;
-    let descricao = req.body.descricao;
-    res.send('formulario recebido ' + titulo + ' ' + descricao);
+    let title = req.body.title;
+    let description = req.body.description;
+
+    Question.create({
+        title: title,
+        description: description
+    }).then(() => {
+        res.redirect('/');
+    });
 });
 
 
