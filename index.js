@@ -4,10 +4,6 @@ const bodyParser = require('body-parser');
 const sequelize = require('./database/db')
 const Question = require('./database/Question');
 
-//Database
-
-
-
 // EJS como view enginer
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -20,9 +16,14 @@ app.use(bodyParser.json());
 
 //ROTAS
 app.get('/', (req, res) => {
-    Question.findAll({raw: true}).then(questions => { // raw: true para retornar apenas os dados
+    Question.findAll({
+        raw: true,
+        order: [
+            ['id', 'DESC']
+        ]
+    }).then(questions => {
         console.log(questions);
-        res.render('index' ,{
+        res.render('index', {
             questions: questions
         });
     });
@@ -41,6 +42,23 @@ app.post('/savequestion', (req, res) => {
         description: description
     }).then(() => {
         res.redirect('/');
+    });
+});
+
+app.get('/question/:id', (req, res) => {
+    let id = req.params.id;
+    Question.findOne({
+        where: {
+            id: id
+        }
+    }).then(question => {
+        if (question != undefined) {
+            res.render('questionparam', {
+                question: question
+            });
+        } else {
+            res.redirect('/');
+        }
     });
 });
 
