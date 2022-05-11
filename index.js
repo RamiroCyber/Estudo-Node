@@ -48,13 +48,19 @@ app.post('/savequestion', (req, res) => {
 app.get('/question/:id', (req, res) => {
     let id = req.params.id;
     Question.findOne({
-        where: {
-            id: id
-        }
+        where: { id: id }
+
     }).then(question => {
+
         if (question != undefined) {
-            res.render('questionparam', {
-                question: question
+            Answer.findAll({
+                where: { questionId: question.id },
+                order: [ ['id', 'DESC'] ]
+            }).then(answers => {
+                res.render('questionparam', {
+                    question: question,
+                    answers: answers
+                });
             });
         } else {
             res.redirect('/');
