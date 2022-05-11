@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const sequelize = require('./database/db')
 const Question = require('./database/Question');
+const Answer = require('./database/Answer')
 
 // EJS como view enginer
 app.set('view engine', 'ejs');
@@ -60,6 +60,18 @@ app.get('/question/:id', (req, res) => {
             res.redirect('/');
         }
     });
+});
+
+app.post('/reply', (req, res) => {
+    let answerbody = req.body.body
+    let questionId = req.body.question
+    Answer.create({
+        body: answerbody,
+        questionId: questionId
+    }).then(() => {
+        res.redirect('/question/' + questionId)
+    })
+
 });
 
 
