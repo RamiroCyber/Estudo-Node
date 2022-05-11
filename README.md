@@ -1,2 +1,2 @@
 # Estudo-Node
-## Projeto feito em Node usando express e EJS como motor grafico
+## Projeto feito em Node usando express, bootstrap e EJS como motor grafico
