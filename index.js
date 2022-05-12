@@ -18,9 +18,8 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
     Question.findAll({
         raw: true,
-        order: [
-            ['id', 'DESC']
-        ]
+        order: [['id', 'DESC']]
+
     }).then(questions => {
         console.log(questions);
         res.render('index', {
@@ -40,6 +39,7 @@ app.post('/savequestion', (req, res) => {
     Question.create({
         title: title,
         description: description
+
     }).then(() => {
         res.redirect('/');
     });
@@ -51,11 +51,11 @@ app.get('/question/:id', (req, res) => {
         where: { id: id }
 
     }).then(question => {
-
         if (question != undefined) {
             Answer.findAll({
                 where: { questionId: question.id },
                 order: [ ['id', 'DESC'] ]
+                
             }).then(answers => {
                 res.render('questionparam', {
                     question: question,
